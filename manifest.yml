@@ -1,0 +1,43 @@
+name: Opengist
+package: community.lazycat.app.opengist
+version: 1.11.0
+min_os_version: 1.3.8
+description: Self-hosted pastebin powered by Git, open-source alternative to Github Gist.
+homepage: https://github.com/thomiceli/opengist
+author: thomiceli
+application:
+  subdomain: opengist
+  oidc_redirect_path: /oauth/openid-connect/callback
+  background_task: true
+  public_path:
+    - /
+
+  upstreams:
+    - location: /
+      backend: http://opengist:6157/
+
+services:
+  opengist:
+    container_name: mango
+    #   ghcr.io/thomiceli/opengist:1.11.0
+    image: ghcr.nju.edu.cn/thomiceli/opengist:1.11.0
+    environment:
+      - OG_OIDC_PROVIDER_NAME=lazycat
+      - OG_OIDC_CLIENT_KEY=${LAZYCAT_AUTH_OIDC_CLIENT_ID}
+      - OG_OIDC_SECRET=${LAZYCAT_AUTH_OIDC_CLIENT_SECRET}
+      # Discovery endpoint of the OpenID provider. Generally something like http://auth.example.com/.well-known/openid-configuration
+      - OG_OIDC_DISCOVERY_URL=https://$LAZYCAT_BOX_DOMAIN/sys/oauth/.well-known/openid-configuration
+      - OG_OIDC_GROUP_CLAIM_NAME=groups
+      - OG_OIDC_ADMIN_GROUP=ADMIN
+    binds:
+      - /lzcapp/var/data:/opengist
+locales:
+  zh:
+    name: "Opengist"
+    description: "基于 Git 的自托管 Pastebin，Github Gist 的开源替代方案。"
+  zh_CN:
+    name: "Opengist"
+    description: "基于 Git 的自托管 Pastebin，Github Gist 的开源替代方案。"
+  en:
+    name: "Opengist"
+    description: "Self-hosted pastebin powered by Git, open-source alternative to Github Gist."
