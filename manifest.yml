@@ -4,15 +4,14 @@ application:
   background_task: true
   public_path:
     - /
-
   upstreams:
     - location: /
       backend: http://opengist:6157/
-
 services:
   opengist:
     container_name: mango
     #   ghcr.io/thomiceli/opengist:1.13.1
+    # upstream: ghcr.io/thomiceli/opengist:1.13.1
     image: ghcr.1ms.run/thomiceli/opengist:1.13.1
     environment:
       - OG_OIDC_PROVIDER_NAME=lazycat
