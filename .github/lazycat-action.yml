@@ -1,0 +1,38 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/opengist.lpk
+
+update:
+  strategy: publish
+  version_source:
+    type: image
+    image: opengist
+
+build:
+  run_buildscript: false
+
+images:
+  - id: opengist
+    target: service
+    service: opengist
+    source: ghcr.io/thomiceli/opengist
+    channel: stable
+    tag_regex: '^v?\d+\.\d+\.\d+$'
+    version_regex: '^v?(?P<version>\d+\.\d+\.\d+)$'
+    delivery:
+      mode: mirror
+      image_template: ghcr.1ms.run/thomiceli/opengist:{tag}
+      require_digest_match: true
+
+stores:
+  official:
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Opengist
+    summary: Published from GitHub Actions
