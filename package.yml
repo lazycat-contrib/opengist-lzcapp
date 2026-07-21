@@ -1,11 +1,10 @@
 name: Opengist
 package: community.lazycat.app.opengist
-version: 1.13.1
+version: 1.14.0
 min_os_version: 1.5.0
 description: Self-hosted pastebin powered by Git, open-source alternative to Github Gist.
 homepage: https://github.com/thomiceli/opengist
 author: thomiceli
-
 locales:
   zh:
     name: "Opengist"
