@@ -1,7 +1,7 @@
 name: Opengist
 package: community.lazycat.app.opengist
 license: AGPL-3.0
-version: 1.15.3
+version: 1.16.0
 min_os_version: 1.5.0
 description: Self-hosted pastebin powered by Git, open-source alternative to Github Gist.
 homepage: https://github.com/thomiceli/opengist
